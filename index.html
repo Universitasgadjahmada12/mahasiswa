@@ -1,167 +1,1043 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universitas Gadjah Mada12</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-        header {
-            background: #003366;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-        nav {
-            background: #0055a5;
-            padding: 10px;
-            text-align: center;
-        }
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-        .hero {
-            background: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914') no-repeat center/cover;
-            height: 400px;
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
-        .hero h1 {
-            background: rgba(0,0,0,0.6);
-            padding: 20px;
-        }
-        .container {
-            padding: 20px;
-        }
-        .grid {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .card {
-            flex: 1 1 calc(33% - 20px);
-            background: #f4f4f4;
-            padding: 15px;
-            border-radius: 8px;
-        }
-        .card img {
-            width: 100%;
-            border-radius: 8px;
-        }
-        footer {
-            background: #003366;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            margin-top: 20px;
-        }
-        @media(max-width:768px){
-            .card {
-                flex: 1 1 100%;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Universitas Gadjah Mada</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            trust: {
+              400: '#E8C870',
+              500: '#D4A843',
+              600: '#B8922E',
+            },
+            surface: {
+              50: '#050505',
+              100: '#080808',
+              200: '#0a0a0a',
+              300: '#101010',
+              400: '#161616',
+              500: '#1a1a1a',
+              600: '#222222',
             }
+          },
+          fontFamily: {
+            geist: ['Geist', 'sans-serif'],
+            space: ['Space Grotesk', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
         }
-    </style>
+      }
+    }
+  </script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #050505; color: #ffffff; font-family: 'Geist', sans-serif; overflow-x: hidden; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #050505; }
+    ::-webkit-scrollbar-thumb { background: #262626; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #404040; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); filter: blur(4px); }
+      to { opacity: 1; transform: translateY(0); filter: blur(0px); }
+    }
+    .fade-up { opacity: 0; animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+    .delay-500 { animation-delay: 0.5s; }
+    .delay-600 { animation-delay: 0.6s; }
+
+    .text-gradient-gold {
+      background: linear-gradient(to bottom, #ffffff, rgba(255,255,255,0.6));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .logo-gradient {
+      background: linear-gradient(to top right, #D4A843, #E8C870);
+    }
+
+    .grid-bg {
+      background-image: linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 4rem 4rem;
+      mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+    }
+
+    .card-highlight {
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.04), transparent 50%);
+    }
+
+    .hero-slide { transition: opacity 0.8s ease, transform 0.8s ease; }
+    .hero-slide.active { opacity: 1; transform: scale(1); }
+    .hero-slide.inactive { opacity: 0; transform: scale(1.05); }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-track { animation: marquee 40s linear infinite; }
+    .marquee-track:hover { animation-play-state: paused; }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 18px rgba(212,168,67,0.25); }
+      50% { box-shadow: 0 0 34px rgba(212,168,67,0.55); }
+    }
+
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0;
+      width: 0; height: 1.5px;
+      background: #D4A843;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    .news-card img { transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    .news-card:hover img { transform: scale(1.08); }
+
+    .service-card { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+    .service-card:hover { transform: translateY(-4px); border-color: rgba(212,168,67,0.35); }
+    .service-card:hover .service-icon { color: #D4A843; transform: scale(1.1); }
+
+    .stat-number { font-variant-numeric: tabular-nums; }
+
+    .search-modal { transition: all 0.3s ease; }
+
+    /* Mobile menu */
+    .mobile-menu { 
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateX(100%);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+
+    .top-bar-link { transition: color 0.2s ease; }
+    .top-bar-link:hover { color: #D4A843; }
+  </style>
 </head>
 <body>
 
-<header>
-    <h1>Universitas Gadjah Mada12</h1>
-    <p>Mewujudkan Pendidikan Berkualitas dan Berdaya Saing Global</p>
-</header>
-
-<nav>
-    <a href="#">Beranda</a>
-    <a href="#">Profil</a>
-    <a href="#">Fakultas</a>
-    <a href="#">Berita</a>
-    <a href="#">Kontak</a>
-</nav>
-
-<section class="hero">
-    <h1>Selamat Datang di Universitas Gadjah Mada12</h1>
-</section>
-
-<div class="container">
-    <h2>Profil Universitas</h2>
-    <p>
-        Universitas Gadjah Mada12 adalah institusi pendidikan tinggi yang berkomitmen
-        dalam pengembangan ilmu pengetahuan, teknologi, dan karakter mahasiswa
-        untuk masa depan yang lebih baik.
-    </p>
-</div>
-
-<div class="container">
-    <h2>Fakultas</h2>
-    <div class="grid">
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644">
-            <h3>Fakultas Teknik</h3>
-            <p>Mengembangkan inovasi teknologi modern.</p>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1581091870622-1e7c0d8d8b2c">
-            <h3>Fakultas Kedokteran</h3>
-            <p>Mendidik tenaga medis profesional.</p>
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc">
-            <h3>Fakultas Ekonomi</h3>
-            <p>Membentuk ahli ekonomi dan bisnis.</p>
-        </div>
+  <!-- ===== TOP BAR ===== -->
+  <div class="w-full bg-surface-200 border-b border-white/5 text-xs font-geist hidden md:block">
+    <div class="max-w-7xl mx-auto px-6 h-8 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a href="#" class="top-bar-link text-neutral-500 hover:text-trust-500">Akademik</a>
+        <span class="text-neutral-700">|</span>
+        <a href="#" class="top-bar-link text-neutral-500 hover:text-trust-500">Riset</a>
+        <span class="text-neutral-700">|</span>
+        <a href="#" class="top-bar-link text-neutral-500 hover:text-trust-500">Kemahasiswaan</a>
+        <span class="text-neutral-700">|</span>
+        <a href="#" class="top-bar-link text-neutral-500 hover:text-trust-500">Alumni</a>
+        <span class="text-neutral-700">|</span>
+        <a href="#" class="top-bar-link text-neutral-500 hover:text-trust-500">Internasional</a>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="#" class="top-bar-link text-neutral-500 hover:text-trust-500">Peta Kampus</a>
+        <span class="text-neutral-700">|</span>
+        <a href="#" class="top-bar-link text-neutral-500 hover:text-trust-500">Email UGM</a>
+        <span class="text-neutral-700">|</span>
+        <a href="#" class="top-bar-link text-neutral-500 hover:text-trust-500">EN</a>
+      </div>
     </div>
-</div>
+  </div>
 
-<div class="container">
-    <h2>Berita Terbaru</h2>
-    <div class="grid">
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c">
-            <h3>Seminar Nasional</h3>
-            <p>Seminar nasional teknologi dihadiri ratusan peserta.</p>
+  <!-- ===== NAVBAR ===== -->
+  <nav class="fixed top-0 md:top-8 left-0 right-0 z-50 md:mx-auto md:max-w-5xl">
+    <div class="mx-4 mt-2 md:mx-0">
+      <div class="backdrop-blur-md bg-surface-50/80 border border-white/10 rounded-2xl md:rounded-full px-4 md:px-2 py-2 md:py-1.5 flex items-center justify-between shadow-2xl">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-9 h-9 rounded-xl logo-gradient flex items-center justify-center shadow-lg">
+            <span class="text-black font-space font-bold text-sm">UGM</span>
+          </div>
+          <div class="hidden md:block">
+            <span class="text-sm font-semibold tracking-tight">Universitas Gadjah Mada</span>
+          </div>
+        </a>
+
+        <!-- Desktop Nav -->
+        <div class="hidden md:flex items-center gap-1">
+          <a href="#berita" class="nav-link text-sm font-medium text-neutral-400 hover:text-white px-4 py-1.5 transition-colors">Berita</a>
+          <a href="#akademik" class="nav-link text-sm font-medium text-neutral-400 hover:text-white px-4 py-1.5 transition-colors">Akademik</a>
+          <a href="#riset" class="nav-link text-sm font-medium text-neutral-400 hover:text-white px-4 py-1.5 transition-colors">Riset</a>
+          <a href="#layanan" class="nav-link text-sm font-medium text-neutral-400 hover:text-white px-4 py-1.5 transition-colors">Layanan</a>
+          <a href="#tentang" class="nav-link text-sm font-medium text-neutral-400 hover:text-white px-4 py-1.5 transition-colors">Tentang</a>
         </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b">
-            <h3>Wisuda 2026</h3>
-            <p>Ribuan mahasiswa resmi diwisuda tahun ini.</p>
+
+        <!-- Actions -->
+        <div class="flex items-center gap-2">
+          <button onclick="toggleSearch()" class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white hover:border-white/20 transition-all">
+            <iconify-icon icon="lucide:search" width="16"></iconify-icon>
+          </button>
+          <a href="#" class="hidden md:inline-flex items-center gap-2 bg-trust-500 text-black text-sm font-semibold px-5 py-2 rounded-full hover:bg-trust-400 transition-all shadow-[0_0_18px_rgba(212,168,67,0.25)] hover:shadow-[0_0_34px_rgba(212,168,67,0.55)]">
+            Pendaftaran
+          </a>
+          <button onclick="toggleMobileMenu()" class="md:hidden w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white transition-all">
+            <iconify-icon icon="lucide:menu" width="18" id="menuIcon"></iconify-icon>
+          </button>
         </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1497493292307-31c376b6e479">
-            <h3>Kerjasama Internasional</h3>
-            <p>Menjalin kerja sama dengan universitas luar negeri.</p>
-        </div>
+      </div>
     </div>
-</div>
+  </nav>
 
-<div class="container">
-    <h2>Galeri Kampus</h2>
-    <div class="grid">
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1562774053-701939374585">
+  <!-- ===== MOBILE MENU ===== -->
+  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-[60] bg-surface-50/98 backdrop-blur-xl">
+    <div class="flex items-center justify-between px-6 pt-6 pb-8">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl logo-gradient flex items-center justify-center">
+          <span class="text-black font-space font-bold text-sm">UGM</span>
         </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1588072432836-e10032774350">
-        </div>
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754">
-        </div>
+        <span class="text-sm font-semibold">UGM</span>
+      </div>
+      <button onclick="toggleMobileMenu()" class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white transition-all">
+        <iconify-icon icon="lucide:x" width="18"></iconify-icon>
+      </button>
     </div>
-</div>
+    <div class="px-6 flex flex-col gap-1">
+      <a href="#berita" onclick="toggleMobileMenu()" class="text-lg font-medium text-neutral-300 hover:text-white py-3 border-b border-white/5 transition-colors">Berita</a>
+      <a href="#akademik" onclick="toggleMobileMenu()" class="text-lg font-medium text-neutral-300 hover:text-white py-3 border-b border-white/5 transition-colors">Akademik</a>
+      <a href="#riset" onclick="toggleMobileMenu()" class="text-lg font-medium text-neutral-300 hover:text-white py-3 border-b border-white/5 transition-colors">Riset</a>
+      <a href="#layanan" onclick="toggleMobileMenu()" class="text-lg font-medium text-neutral-300 hover:text-white py-3 border-b border-white/5 transition-colors">Layanan</a>
+      <a href="#tentang" onclick="toggleMobileMenu()" class="text-lg font-medium text-neutral-300 hover:text-white py-3 border-b border-white/5 transition-colors">Tentang</a>
+      <a href="#" class="mt-6 w-full text-center bg-trust-500 text-black text-sm font-semibold px-5 py-3 rounded-full hover:bg-trust-400 transition-all">Pendaftaran</a>
+    </div>
+  </div>
 
-<footer>
-    <p>&copy; 2026 Universitas Gadjah Mada12 | All Rights Reserved</p>
-</footer>
+  <!-- ===== SEARCH MODAL ===== -->
+  <div id="searchModal" class="search-modal fixed inset-0 z-[70] bg-black/70 backdrop-blur-sm flex items-start justify-center pt-32 opacity-0 pointer-events-none">
+    <div class="w-full max-w-2xl mx-4 bg-surface-300 border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
+      <div class="flex items-center gap-3 px-5 py-4 border-b border-white/5">
+        <iconify-icon icon="lucide:search" width="20" class="text-neutral-500"></iconify-icon>
+        <input id="searchInput" type="text" placeholder="Cari berita, layanan, informasi..." class="flex-1 bg-transparent text-white text-sm outline-none placeholder:text-neutral-600 font-geist">
+        <kbd class="text-[10px] font-mono text-neutral-600 border border-white/10 rounded px-1.5 py-0.5">ESC</kbd>
+      </div>
+      <div class="px-5 py-4">
+        <p class="text-[11px] text-neutral-600 uppercase tracking-wider font-medium mb-3">Pencarian Populer</p>
+        <div class="flex flex-wrap gap-2">
+          <a href="#" class="text-xs text-neutral-400 bg-white/5 border border-white/5 rounded-full px-3 py-1.5 hover:border-trust-500/30 hover:text-trust-400 transition-all">Penerimaan Mahasiswa Baru</a>
+          <a href="#" class="text-xs text-neutral-400 bg-white/5 border border-white/5 rounded-full px-3 py-1.5 hover:border-trust-500/30 hover:text-trust-400 transition-all">Jadwal Ujian</a>
+          <a href="#" class="text-xs text-neutral-400 bg-white/5 border border-white/5 rounded-full px-3 py-1.5 hover:border-trust-500/30 hover:text-trust-400 transition-all">Beasiswa</a>
+          <a href="#" class="text-xs text-neutral-400 bg-white/5 border border-white/5 rounded-full px-3 py-1.5 hover:border-trust-500/30 hover:text-trust-400 transition-all">Kalender Akademik</a>
+          <a href="#" class="text-xs text-neutral-400 bg-white/5 border border-white/5 rounded-full px-3 py-1.5 hover:border-trust-500/30 hover:text-trust-400 transition-all">Fakultas</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="relative min-h-screen flex items-center pt-32 md:pt-40 pb-20 overflow-hidden">
+    <!-- Grid BG -->
+    <div class="absolute inset-0 grid-bg"></div>
+    <!-- Glow -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-trust-500/[0.06] blur-[120px] rounded-full"></div>
+    <!-- Decorative lines -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-trust-500/[0.06] rounded-full"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-trust-500/[0.03] rounded-full"></div>
+
+    <div class="relative max-w-7xl mx-auto px-6 w-full">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Left Content -->
+        <div>
+          <!-- Badge -->
+          <div class="fade-up inline-flex items-center gap-2 bg-trust-500/10 border border-trust-500/20 rounded-full px-4 py-1.5 mb-8">
+            <span class="w-1.5 h-1.5 rounded-full bg-trust-500 animate-pulse"></span>
+            <span class="text-[11px] font-medium tracking-wider uppercase text-trust-400">Pendaftaran UM UGM 2025 Dibuka</span>
+          </div>
+
+          <h1 class="fade-up delay-100 font-space font-bold text-5xl md:text-7xl lg:text-[96px] leading-[0.95] tracking-tight mb-6">
+            <span class="text-gradient-gold">Menggerakkan</span><br>
+            <span class="text-white">Indonesia</span>
+          </h1>
+
+          <p class="fade-up delay-200 text-lg md:text-xl font-light text-neutral-400 leading-relaxed tracking-tight max-w-lg mb-10">
+            Universitas Gadjah Mada — tempat tradisi keilmuan bertemu inovasi masa depan. Bersama kita wujudkan perubahan.
+          </p>
+
+          <div class="fade-up delay-300 flex flex-wrap items-center gap-4">
+            <a href="#" class="group inline-flex items-center gap-2.5 bg-trust-500 text-black text-sm font-semibold px-7 py-3.5 rounded-full hover:bg-trust-400 transition-all shadow-[0_0_18px_rgba(212,168,67,0.25)] hover:shadow-[0_0_34px_rgba(212,168,67,0.55)]">
+              Jelajahi UGM
+              <iconify-icon icon="lucide:arrow-right" width="16" class="transition-transform group-hover:translate-x-1"></iconify-icon>
+            </a>
+            <a href="#" class="group inline-flex items-center gap-2.5 border border-white/10 text-white text-sm font-semibold px-7 py-3.5 rounded-full hover:bg-white/10 hover:border-white/20 transition-all">
+              <iconify-icon icon="lucide:play" width="16"></iconify-icon>
+              Tur Virtual
+            </a>
+          </div>
+
+          <!-- Stats mini -->
+          <div class="fade-up delay-400 mt-14 flex items-center gap-8">
+            <div>
+              <div class="stat-number text-2xl font-space font-bold text-white">75+</div>
+              <div class="text-xs text-neutral-500 mt-0.5">Tahun Berdiri</div>
+            </div>
+            <div class="w-px h-10 bg-white/10"></div>
+            <div>
+              <div class="stat-number text-2xl font-space font-bold text-white">18</div>
+              <div class="text-xs text-neutral-500 mt-0.5">Fakultas</div>
+            </div>
+            <div class="w-px h-10 bg-white/10"></div>
+            <div>
+              <div class="stat-number text-2xl font-space font-bold text-white">55K+</div>
+              <div class="text-xs text-neutral-500 mt-0.5">Mahasiswa</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right - Hero Image -->
+        <div class="fade-up delay-300 relative">
+          <div class="relative h-[500px] lg:h-[600px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+            <img src="https://picsum.photos/seed/ugm-campus-main/800/1000.jpg" alt="UGM Campus" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-surface-50 via-transparent to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-r from-surface-50/60 via-transparent to-transparent"></div>
+            <!-- Floating card -->
+            <div class="absolute bottom-6 left-6 right-6 backdrop-blur-xl bg-surface-50/80 border border-white/10 rounded-2xl p-4 flex items-center gap-4">
+              <div class="w-12 h-12 rounded-xl bg-trust-500/10 border border-trust-500/20 flex items-center justify-center flex-shrink-0">
+                <iconify-icon icon="lucide:graduation-cap" width="22" class="text-trust-400"></iconify-icon>
+              </div>
+              <div>
+                <div class="text-sm font-semibold text-white">Ranking #4 Nasional</div>
+                <div class="text-xs text-neutral-500 mt-0.5">QS World University Rankings 2025</div>
+              </div>
+            </div>
+          </div>
+          <!-- Glow behind image -->
+          <div class="absolute -inset-4 bg-trust-500/[0.08] blur-[60px] rounded-3xl -z-10"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MARQUEE PARTNERS ===== -->
+  <section class="border-y border-white/5 py-6 overflow-hidden">
+    <div class="relative">
+      <div class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-surface-50 to-transparent z-10"></div>
+      <div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-surface-50 to-transparent z-10"></div>
+      <div class="flex marquee-track" style="width: max-content;">
+        <div class="flex items-center gap-16 px-8">
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">Kementerian Pendidikan</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">BRIN</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">QS World Rankings</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">ASEAN University Network</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">World Health Organization</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">UNESCO</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">DAAD</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">Erasmus+</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">Toyota Foundation</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">USAID</span>
+          <span class="text-neutral-800">●</span>
+        </div>
+        <div class="flex items-center gap-16 px-8">
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">Kementerian Pendidikan</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">BRIN</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">QS World Rankings</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">ASEAN University Network</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">World Health Organization</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">UNESCO</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">DAAD</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">Erasmus+</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">Toyota Foundation</span>
+          <span class="text-neutral-800">●</span>
+          <span class="text-sm text-neutral-600 font-medium whitespace-nowrap">USAID</span>
+          <span class="text-neutral-800">●</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BERITA TERKINI ===== -->
+  <section id="berita" class="py-24 relative">
+    <div class="max-w-7xl mx-auto px-6">
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+        <div>
+          <div class="fade-up inline-flex items-center gap-2 mb-4">
+            <span class="w-8 h-px bg-trust-500"></span>
+            <span class="text-[11px] font-semibold tracking-wider uppercase text-trust-400">Berita Terkini</span>
+          </div>
+          <h2 class="fade-up delay-100 font-space font-bold text-3xl md:text-5xl tracking-tight leading-[1.05] text-gradient-gold">
+            Informasi<br>Terbaru
+          </h2>
+        </div>
+        <a href="#" class="fade-up delay-200 group inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors">
+          Lihat semua berita
+          <iconify-icon icon="lucide:arrow-right" width="14" class="transition-transform group-hover:translate-x-1"></iconify-icon>
+        </a>
+      </div>
+
+      <!-- News Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Featured -->
+        <div class="fade-up delay-100 news-card md:col-span-2 lg:col-span-2 group relative rounded-3xl overflow-hidden border border-white/10 hover:border-trust-500/35 transition-all duration-500 cursor-pointer">
+          <div class="relative h-72 md:h-96 overflow-hidden">
+            <img src="https://picsum.photos/seed/ugm-research-lab/1200/800.jpg" alt="Berita Utama" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-surface-50 via-surface-50/40 to-transparent"></div>
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+            <div class="flex items-center gap-3 mb-3">
+              <span class="text-[10px] font-semibold tracking-wider uppercase text-trust-400 bg-trust-500/10 border border-trust-500/20 rounded-full px-3 py-1">Riset</span>
+              <span class="text-xs text-neutral-500">19 Desember 2024</span>
+            </div>
+            <h3 class="font-space font-bold text-xl md:text-2xl tracking-tight text-white mb-2 group-hover:text-trust-400 transition-colors">Peneliti UGM Kembangkan Teknologi Nanosensor untuk Deteksi Dini Penyakit Tropis</h3>
+            <p class="text-sm text-neutral-400 line-clamp-2">Tim riset interdisipliner dari Fakultas Kedokteran dan Teknik berhasil mengembangkan sensor nano berbasis grafena yang mampu mendeteksi biomarker penyakit tropis...</p>
+          </div>
+        </div>
+
+        <!-- Side news -->
+        <div class="flex flex-col gap-6">
+          <div class="fade-up delay-200 news-card group relative rounded-2xl overflow-hidden border border-white/10 hover:border-trust-500/35 transition-all duration-500 cursor-pointer flex-1">
+            <div class="relative h-44 overflow-hidden">
+              <img src="https://picsum.photos/seed/ugm-graduation/800/600.jpg" alt="Berita 2" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-surface-50 via-surface-50/50 to-transparent"></div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 p-5">
+              <span class="text-[10px] font-semibold tracking-wider uppercase text-trust-400">Akademik</span>
+              <h3 class="font-space font-bold text-base tracking-tight text-white mt-1.5 group-hover:text-trust-400 transition-colors line-clamp-2">Wisuda Periode Desember: 1.243 Lulusan Siap Berkontribusi</h3>
+            </div>
+          </div>
+
+          <div class="fade-up delay-300 news-card group relative rounded-2xl overflow-hidden border border-white/10 hover:border-trust-500/35 transition-all duration-500 cursor-pointer flex-1">
+            <div class="relative h-44 overflow-hidden">
+              <img src="https://picsum.photos/seed/ugm-international/800/600.jpg" alt="Berita 3" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-surface-50 via-surface-50/50 to-transparent"></div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 p-5">
+              <span class="text-[10px] font-semibold tracking-wider uppercase text-trust-400">Internasional</span>
+              <h3 class="font-space font-bold text-base tracking-tight text-white mt-1.5 group-hover:text-trust-400 transition-colors line-clamp-2">MoU dengan 5 Universitas Eropa untuk Program Dual Degree</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- More news row -->
+      <div class="grid md:grid-cols-3 gap-6 mt-6">
+        <div class="fade-up delay-400 news-card group rounded-2xl border border-white/10 hover:border-trust-500/35 bg-surface-300/50 card-highlight overflow-hidden transition-all duration-500 cursor-pointer">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://picsum.photos/seed/ugm-community/800/500.jpg" alt="Berita 4" class="w-full h-full object-cover">
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-[10px] font-semibold tracking-wider uppercase text-trust-400">Pengabdian</span>
+              <span class="text-[10px] text-neutral-600">15 Des 2024</span>
+            </div>
+            <h3 class="font-space font-bold text-sm tracking-tight text-white group-hover:text-trust-400 transition-colors line-clamp-2">KKN UGM di Pedalaman Papua: Membangun Air Bersih</h3>
+          </div>
+        </div>
+
+        <div class="fade-up delay-500 news-card group rounded-2xl border border-white/10 hover:border-trust-500/35 bg-surface-300/50 card-highlight overflow-hidden transition-all duration-500 cursor-pointer">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://picsum.photos/seed/ugm-innovation/800/500.jpg" alt="Berita 5" class="w-full h-full object-cover">
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-[10px] font-semibold tracking-wider uppercase text-trust-400">Inovasi</span>
+              <span class="text-[10px] text-neutral-600">12 Des 2024</span>
+            </div>
+            <h3 class="font-space font-bold text-sm tracking-tight text-white group-hover:text-trust-400 transition-colors line-clamp-2">Startup UGM Raih Penghargaan di Ajang Kompetisi Global</h3>
+          </div>
+        </div>
+
+        <div class="fade-up delay-600 news-card group rounded-2xl border border-white/10 hover:border-trust-500/35 bg-surface-300/50 card-highlight overflow-hidden transition-all duration-500 cursor-pointer">
+          <div class="relative h-48 overflow-hidden">
+            <img src="https://picsum.photos/seed/ugm-award-ceremony/800/500.jpg" alt="Berita 6" class="w-full h-full object-cover">
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-[10px] font-semibold tracking-wider uppercase text-trust-400">Prestasi</span>
+              <span class="text-[10px] text-neutral-600">10 Des 2024</span>
+            </div>
+            <h3 class="font-space font-bold text-sm tracking-tight text-white group-hover:text-trust-400 transition-colors line-clamp-2">Prof. UGM Terpilih sebagai Fellow Academia Europaea</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LAYANAN ===== -->
+  <section id="layanan" class="py-24 relative">
+    <!-- Glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-trust-500/[0.04] blur-[120px] rounded-full"></div>
+    <div class="relative max-w-7xl mx-auto px-6">
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <div class="fade-up inline-flex items-center gap-2 mb-4">
+          <span class="w-8 h-px bg-trust-500"></span>
+          <span class="text-[11px] font-semibold tracking-wider uppercase text-trust-400">Layanan Digital</span>
+          <span class="w-8 h-px bg-trust-500"></span>
+        </div>
+        <h2 class="fade-up delay-100 font-space font-bold text-3xl md:text-5xl tracking-tight leading-[1.05] text-gradient-gold mb-4">
+          Akses Cepat
+        </h2>
+        <p class="fade-up delay-200 text-neutral-400 text-lg font-light leading-relaxed">
+          Semua layanan yang kamu butuhkan dalam satu tempat.
+        </p>
+      </div>
+
+      <!-- Services Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <a href="#" class="fade-up delay-100 service-card group rounded-2xl border border-white/10 bg-surface-300/50 card-highlight p-6 cursor-pointer">
+          <div class="service-icon w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-5 text-neutral-400 transition-all duration-500">
+            <iconify-icon icon="lucide:user-plus" width="22"></iconify-icon>
+          </div>
+          <h3 class="font-space font-semibold text-base text-white mb-2">Penerimaan Mahasiswa Baru</h3>
+          <p class="text-sm text-neutral-500 leading-relaxed">Informasi jalur masuk, jadwal, dan persyaratan pendaftaran.</p>
+          <div class="mt-4 flex items-center gap-1.5 text-xs text-neutral-600 group-hover:text-trust-400 transition-colors">
+            <span>Akses</span>
+            <iconify-icon icon="lucide:arrow-up-right" width="12" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></iconify-icon>
+          </div>
+        </a>
+
+        <a href="#" class="fade-up delay-200 service-card group rounded-2xl border border-white/10 bg-surface-300/50 card-highlight p-6 cursor-pointer">
+          <div class="service-icon w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-5 text-neutral-400 transition-all duration-500">
+            <iconify-icon icon="lucide:book-open" width="22"></iconify-icon>
+          </div>
+          <h3 class="font-space font-semibold text-base text-white mb-2">Sistem Pembelajaran</h3>
+          <p class="text-sm text-neutral-500 leading-relaxed">Akses e-Learning, jadwal kuliah, dan nilai akademik.</p>
+          <div class="mt-4 flex items-center gap-1.5 text-xs text-neutral-600 group-hover:text-trust-400 transition-colors">
+            <span>Akses</span>
+            <iconify-icon icon="lucide:arrow-up-right" width="12" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></iconify-icon>
+          </div>
+        </a>
+
+        <a href="#" class="fade-up delay-300 service-card group rounded-2xl border border-white/10 bg-surface-300/50 card-highlight p-6 cursor-pointer">
+          <div class="service-icon w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-5 text-neutral-400 transition-all duration-500">
+            <iconify-icon icon="lucide:library" width="22"></iconify-icon>
+          </div>
+          <h3 class="font-space font-semibold text-base text-white mb-2">Perpustakaan UGM</h3>
+          <p class="text-sm text-neutral-500 leading-relaxed">Katalog digital, reservasi, dan akses jurnal internasional.</p>
+          <div class="mt-4 flex items-center gap-1.5 text-xs text-neutral-600 group-hover:text-trust-400 transition-colors">
+            <span>Akses</span>
+            <iconify-icon icon="lucide:arrow-up-right" width="12" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></iconify-icon>
+          </div>
+        </a>
+
+        <a href="#" class="fade-up delay-200 service-card group rounded-2xl border border-white/10 bg-surface-300/50 card-highlight p-6 cursor-pointer">
+          <div class="service-icon w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-5 text-neutral-400 transition-all duration-500">
+            <iconify-icon icon="lucide:mail" width="22"></iconify-icon>
+          </div>
+          <h3 class="font-space font-semibold text-base text-white mb-2">Email UGM</h3>
+          <p class="text-sm text-neutral-500 leading-relaxed">Layanan email resmi untuk civitas akademika UGM.</p>
+          <div class="mt-4 flex items-center gap-1.5 text-xs text-neutral-600 group-hover:text-trust-400 transition-colors">
+            <span>Akses</span>
+            <iconify-icon icon="lucide:arrow-up-right" width="12" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></iconify-icon>
+          </div>
+        </a>
+
+        <a href="#" class="fade-up delay-300 service-card group rounded-2xl border border-white/10 bg-surface-300/50 card-highlight p-6 cursor-pointer">
+          <div class="service-icon w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-5 text-neutral-400 transition-all duration-500">
+            <iconify-icon icon="lucide:file-text" width="22"></iconify-icon>
+          </div>
+          <h3 class="font-space font-semibold text-base text-white mb-2">SIAKAD</h3>
+          <p class="text-sm text-neutral-500 leading-relaxed">Sistem informasi akademik terintegrasi untuk mahasiswa.</p>
+          <div class="mt-4 flex items-center gap-1.5 text-xs text-neutral-600 group-hover:text-trust-400 transition-colors">
+            <span>Akses</span>
+            <iconify-icon icon="lucide:arrow-up-right" width="12" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></iconify-icon>
+          </div>
+        </a>
+
+        <a href="#" class="fade-up delay-400 service-card group rounded-2xl border border-white/10 bg-surface-300/50 card-highlight p-6 cursor-pointer">
+          <div class="service-icon w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-5 text-neutral-400 transition-all duration-500">
+            <iconify-icon icon="lucide:heart-handshake" width="22"></iconify-icon>
+          </div>
+          <h3 class="font-space font-semibold text-base text-white mb-2">Beasiswa</h3>
+          <p class="text-sm text-neutral-500 leading-relaxed">Daftar beasiswa dalam dan luar negeri untuk mahasiswa UGM.</p>
+          <div class="mt-4 flex items-center gap-1.5 text-xs text-neutral-600 group-hover:text-trust-400 transition-colors">
+            <span>Akses</span>
+            <iconify-icon icon="lucide:arrow-up-right" width="12" class="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></iconify-icon>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAKULTAS ===== -->
+  <section id="akademik" class="py-24 border-t border-white/5 relative">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
+        <div>
+          <div class="fade-up inline-flex items-center gap-2 mb-4">
+            <span class="w-8 h-px bg-trust-500"></span>
+            <span class="text-[11px] font-semibold tracking-wider uppercase text-trust-400">Akademik</span>
+          </div>
+          <h2 class="fade-up delay-100 font-space font-bold text-3xl md:text-5xl tracking-tight leading-[1.05] text-gradient-gold">
+            18 Fakultas
+          </h2>
+        </div>
+        <a href="#" class="fade-up delay-200 group inline-flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors">
+          Lihat seluruh fakultas
+          <iconify-icon icon="lucide:arrow-right" width="14" class="transition-transform group-hover:translate-x-1"></iconify-icon>
+        </a>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="fade-up delay-100 group rounded-2xl border border-white/10 bg-surface-300/30 p-5 hover:border-trust-500/30 hover:bg-surface-300/60 transition-all duration-500 cursor-pointer">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-9 h-9 rounded-lg bg-trust-500/10 flex items-center justify-center text-trust-400">
+              <iconify-icon icon="lucide:stethoscope" width="16"></iconify-icon>
+            </div>
+            <h3 class="font-space font-semibold text-sm text-white group-hover:text-trust-400 transition-colors">Kedokteran</h3>
+          </div>
+          <p class="text-xs text-neutral-600">12 Program Studi</p>
+        </div>
+        <div class="fade-up delay-200 group rounded-2xl border border-white/10 bg-surface-300/30 p-5 hover:border-trust-500/30 hover:bg-surface-300/60 transition-all duration-500 cursor-pointer">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-9 h-9 rounded-lg bg-trust-500/10 flex items-center justify-center text-trust-400">
+              <iconify-icon icon="lucide:cpu" width="16"></iconify-icon>
+            </div>
+            <h3 class="font-space font-semibold text-sm text-white group-hover:text-trust-400 transition-colors">Teknik</h3>
+          </div>
+          <p class="text-xs text-neutral-600">9 Program Studi</p>
+        </div>
+        <div class="fade-up delay-300 group rounded-2xl border border-white/10 bg-surface-300/30 p-5 hover:border-trust-500/30 hover:bg-surface-300/60 transition-all duration-500 cursor-pointer">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-9 h-9 rounded-lg bg-trust-500/10 flex items-center justify-center text-trust-400">
+              <iconify-icon icon="lucide:scales" width="16"></iconify-icon>
+            </div>
+            <h3 class="font-space font-semibold text-sm text-white group-hover:text-trust-400 transition-colors">Hukum</h3>
+          </div>
+          <p class="text-xs text-neutral-600">5 Program Studi</p>
+        </div>
+        <div class="fade-up delay-400 group rounded-2xl border border-white/10 bg-surface-300/30 p-5 hover:border-trust-500/30 hover:bg-surface-300/60 transition-all duration-500 cursor-pointer">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-9 h-9 rounded-lg bg-trust-500/10 flex items-center justify-center text-trust-400">
+              <iconify-icon icon="lucide:landmark" width="16"></iconify-icon>
+            </div>
+            <h3 class="font-space font-semibold text-sm text-white group-hover:text-trust-400 transition-colors">FISIPOL</h3>
+          </div>
+          <p class="text-xs text-neutral-600">8 Program Studi</p>
+        </div>
+        <div class="fade-up delay-200 group rounded-2xl border border-white/10 bg-surface-300/30 p-5 hover:border-trust-500/30 hover:bg-surface-300/60 transition-all duration-500 cursor-pointer">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-9 h-9 rounded-lg bg-trust-500/10 flex items-center justify-center text-trust-400">
+              <iconify-icon icon="lucide:flask-conical" width="16"></iconify-icon>
+            </div>
+            <h3 class="font-space font-semibold text-sm text-white group-hover:text-trust-400 transition-colors">MIPA</h3>
+          </div>
+          <p class="text-xs text-neutral-600">10 Program Studi</p>
+        </div>
+        <div class="fade-up delay-300 group rounded-2xl border border-white/10 bg-surface-300/30 p-5 hover:border-trust-500/30 hover:bg-surface-300/60 transition-all duration-500 cursor-pointer">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-9 h-9 rounded-lg bg-trust-500/10 flex items-center justify-center text-trust-400">
+              <iconify-icon icon="lucide:wheat" width="16"></iconify-icon>
+            </div>
+            <h3 class="font-space font-semibold text-sm text-white group-hover:text-trust-400 transition-colors">Pertanian</h3>
+          </div>
+          <p class="text-xs text-neutral-600">9 Program Studi</p>
+        </div>
+        <div class="fade-up delay-400 group rounded-2xl border border-white/10 bg-surface-300/30 p-5 hover:border-trust-500/30 hover:bg-surface-300/60 transition-all duration-500 cursor-pointer">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-9 h-9 rounded-lg bg-trust-500/10 flex items-center justify-center text-trust-400">
+              <iconify-icon icon="lucide:pill" width="16"></iconify-icon>
+            </div>
+            <h3 class="font-space font-semibold text-sm text-white group-hover:text-trust-400 transition-colors">Farmasi</h3>
+          </div>
+          <p class="text-xs text-neutral-600">4 Program Studi</p>
+        </div>
+        <div class="fade-up delay-500 group rounded-2xl border border-white/10 bg-surface-300/30 p-5 hover:border-trust-500/30 hover:bg-surface-300/60 transition-all duration-500 cursor-pointer">
+          <div class="flex items-center gap-3 mb-2">
+            <div class="w-9 h-9 rounded-lg bg-trust-500/10 flex items-center justify-center text-trust-400">
+              <iconify-icon icon="lucide:tree-pine" width="16"></iconify-icon>
+            </div>
+            <h3 class="font-space font-semibold text-sm text-white group-hover:text-trust-400 transition-colors">Kehutanan</h3>
+          </div>
+          <p class="text-xs text-neutral-600">5 Program Studi</p>
+        </div>
+      </div>
+
+      <div class="fade-up delay-400 text-center mt-10">
+        <a href="#" class="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-trust-400 transition-colors border border-white/5 rounded-full px-5 py-2.5 hover:border-trust-500/20">
+          +10 Fakultas lainnya
+          <iconify-icon icon="lucide:chevron-right" width="14"></iconify-icon>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AGENDA ===== -->
+  <section id="riset" class="py-24 border-t border-white/5 relative">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid lg:grid-cols-5 gap-12 lg:gap-16">
+        <!-- Left -->
+        <div class="lg:col-span-2">
+          <div class="lg:sticky lg:top-40">
+            <div class="fade-up inline-flex items-center gap-2 mb-4">
+              <span class="w-8 h-px bg-trust-500"></span>
+              <span class="text-[11px] font-semibold tracking-wider uppercase text-trust-400">Agenda</span>
+            </div>
+            <h2 class="fade-up delay-100 font-space font-bold text-3xl md:text-5xl tracking-tight leading-[1.05] text-gradient-gold mb-4">
+              Acara<br>Mendatang
+            </h2>
+            <p class="fade-up delay-200 text-neutral-400 text-lg font-light leading-relaxed mb-8">
+              Jangan lewatkan berbagai kegiatan akademik dan budaya di UGM.
+            </p>
+            <a href="#" class="fade-up delay-300 group inline-flex items-center gap-2.5 text-sm font-semibold text-trust-400 hover:text-trust-400 transition-colors">
+              Kalender lengkap
+              <iconify-icon icon="lucide:arrow-right" width="14" class="transition-transform group-hover:translate-x-1"></iconify-icon>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right - Agenda List -->
+        <div class="lg:col-span-3 flex flex-col gap-4">
+          <div class="fade-up delay-100 group flex gap-5 rounded-2xl border border-white/10 bg-surface-300/30 p-5 hover:border-trust-500/30 hover:bg-surface-300/60 transition-all duration-500 cursor-pointer">
+            <div class="flex-shrink-0 w-16 h-16 rounded-xl bg-trust-500/10 border border-trust-500/20 flex flex-col items-center justify-center">
+              <span class="text-lg font-space font-bold text-trust-400 leading-none">20</span>
+              <span class="text-[10px] font-medium text-trust-400/70 uppercase">Des</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-space font-semibold text-sm text-white group-hover:text-trust-400 transition-colors mb-1">Seminar Nasional: Masa Depan AI dalam Pendidikan Tinggi</h3>
+              <div class="flex items-center gap-3 text-xs text-neutral-500">
+                <span class="flex items-center gap-1"><iconify-icon icon="lucide:clock" width="12"></iconify-icon> 09:00 WIB</span>
+                <span class="flex items-center gap-1"><iconify-icon icon="lucide:map-pin" width="12"></iconify-icon> Auditorium GRD</span>
+              </div>
+            </div>
+            <iconify-icon icon="lucide:chevron-right" width="16" class="flex-shrink-0 text-neutral-700 group-hover:text-trust-500 transition-colors self-center"></iconify-icon>
+          </div>
+
+          <div class="fade-up delay-200 group flex gap-5 rounded-2xl border border-white/10 bg-surface-300/30 p-5 hover:border-trust-500/30 hover:bg-surface-300/60 transition-all duration-500 cursor-pointer">
+            <div class="flex-shrink-0 w-16 h-16 rounded-xl bg-trust-500/10 border border-trust-500/20 flex flex-col items-center justify-center">
+              <span class="text-lg font-space font-bold text-trust-400 leading-none">22</span>
+              <span class="text-[10px] font-medium text-trust-400/70 uppercase">Des</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-space font-semibold text-sm text-white group-hover:text-trust-400 transition-colors mb-1">Workshop: Peluang Riset Kolaboratif dengan Industri</h3>
+              <div class="flex items-center gap-3 text-xs text-neutral-500">
+                <span class="flex items-center gap-1"><iconify-icon icon="lucide:clock" width="12"></iconify-icon> 13:00 WIB</span>
+                <span class="flex items-center gap-1"><iconify-icon icon="lucide:map-pin" width="12"></iconify-icon> Ruang Sidang FT</span>
+              </div>
+            </div>
+            <iconify-icon icon="lucide:chevron-right" width="16" class="flex-shrink-0 text-neutral-700 group-hover:text-trust-500 transition-colors self-center"></iconify-icon>
+          </div>
+
+          <div class="fade-up delay-300 group flex gap-5 rounded-2xl border border-white/10 bg-surface-300/30 p-5 hover:border-trust-500/30 hover:bg-surface-300/60 transition-all duration-500 cursor-pointer">
+            <div class="flex-shrink-0 w-16 h-16 rounded-xl bg-trust-500/10 border border-trust-500/20 flex flex-col items-center justify-center">
+              <span class="text-lg font-space font-bold text-trust-400 leading-none">28</span>
+              <span class="text-[10px] font-medium text-trust-400/70 uppercase">Des</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-space font-semibold text-sm text-white group-hover:text-trust-400 transition-colors mb-1">Konser Akhir Tahun: Gadjah Mada Symphony Orchestra</h3>
+              <div class="flex items-center gap-3 text-xs text-neutral-500">
+                <span class="flex items-center gap-1"><iconify-icon icon="lucide:clock" width="12"></iconify-icon> 19:30 WIB</span>
+                <span class="flex items-center gap-1"><iconify-icon icon="lucide:map-pin" width="12"></iconify-icon> Balai Senat UGM</span>
+              </div>
+            </div>
+            <iconify-icon icon="lucide:chevron-right" width="16" class="flex-shrink-0 text-neutral-700 group-hover:text-trust-500 transition-colors self-center"></iconify-icon>
+          </div>
+
+          <div class="fade-up delay-400 group flex gap-5 rounded-2xl border border-white/10 bg-surface-300/30 p-5 hover:border-trust-500/30 hover:bg-surface-300/60 transition-all duration-500 cursor-pointer">
+            <div class="flex-shrink-0 w-16 h-16 rounded-xl bg-trust-500/10 border border-trust-500/20 flex flex-col items-center justify-center">
+              <span class="text-lg font-space font-bold text-trust-400 leading-none">05</span>
+              <span class="text-[10px] font-medium text-trust-400/70 uppercase">Jan</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-space font-semibold text-sm text-white group-hover:text-trust-400 transition-colors mb-1">Upacara Wisuda Periode Januari 2025</h3>
+              <div class="flex items-center gap-3 text-xs text-neutral-500">
+                <span class="flex items-center gap-1"><iconify-icon icon="lucide:clock" width="12"></iconify-icon> 07:30 WIB</span>
+                <span class="flex items-center gap-1"><iconify-icon icon="lucide:map-pin" width="12"></iconify-icon> Grha Sabha Pramana</span>
+              </div>
+            </div>
+            <iconify-icon icon="lucide:chevron-right" width="16" class="flex-shrink-0 text-neutral-700 group-hover:text-trust-500 transition-colors self-center"></iconify-icon>
+          </div>
+
+          <div class="fade-up delay-500 group flex gap-5 rounded-2xl border border-white/10 bg-surface-300/30 p-5 hover:border-trust-500/30 hover:bg-surface-300/60 transition-all duration-500 cursor-pointer">
+            <div class="flex-shrink-0 w-16 h-16 rounded-xl bg-trust-500/10 border border-trust-500/20 flex flex-col items-center justify-center">
+              <span class="text-lg font-space font-bold text-trust-400 leading-none">12</span>
+              <span class="text-[10px] font-medium text-trust-400/70 uppercase">Jan</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-space font-semibold text-sm text-white group-hover:text-trust-400 transition-colors mb-1">Open House: Program Magister dan Doktoral Semester Genap</h3>
+              <div class="flex items-center gap-3 text-xs text-neutral-500">
+                <span class="flex items-center gap-1"><iconify-icon icon="lucide:clock" width="12"></iconify-icon> 10:00 WIB</span>
+                <span class="flex items-center gap-1"><iconify-icon icon="lucide:video" width="12"></iconify-icon> Hybrid</span>
+              </div>
+            </div>
+            <iconify-icon icon="lucide:chevron-right" width="16" class="flex-shrink-0 text-neutral-700 group-hover:text-trust-500 transition-colors self-center"></iconify-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <section class="py-24 border-t border-white/5 relative overflow-hidden">
+    <div class="absolute inset-0 grid-bg"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-trust-500/[0.05] blur-[120px] rounded-full"></div>
+    <div class="relative max-w-7xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <div class="fade-up inline-flex items-center gap-2 mb-4">
+          <span class="w-8 h-px bg-trust-500"></span>
+          <span class="text-[11px] font-semibold tracking-wider uppercase text-trust-400">Unggulan dalam Angka</span>
+          <span class="w-8 h-px bg-trust-500"></span>
+        </div>
+        <h2 class="fade-up delay-100 font-space font-bold text-3xl md:text-5xl tracking-tight leading-[1.05] text-gradient-gold">
+          UGM di Angka
+        </h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="fade-up delay-100 text-center rounded-2xl border border-white/10 bg-surface-300/30 p-8">
+          <div class="stat-number font-space font-bold text-4xl md:text-5xl text-trust-400 mb-2">55K+</div>
+          <div class="text-sm text-neutral-500">Mahasiswa Aktif</div>
+        </div>
+        <div class="fade-up delay-200 text-center rounded-2xl border border-white/10 bg-surface-300/30 p-8">
+          <div class="stat-number font-space font-bold text-4xl md:text-5xl text-trust-400 mb-2">4.500+</div>
+          <div class="text-sm text-neutral-500">Tenaga Pengajar</div>
+        </div>
+        <div class="fade-up delay-300 text-center rounded-2xl border border-white/10 bg-surface-300/30 p-8">
+          <div class="stat-number font-space font-bold text-4xl md:text-5xl text-trust-400 mb-2">251</div>
+          <div class="text-sm text-neutral-500">Program Studi</div>
+        </div>
+        <div class="fade-up delay-400 text-center rounded-2xl border border-white/10 bg-surface-300/30 p-8">
+          <div class="stat-number font-space font-bold text-4xl md:text-5xl text-trust-400 mb-2">350+</div>
+          <div class="text-sm text-neutral-500">Mitra Internasional</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section id="tentang" class="py-24 relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="fade-up relative rounded-3xl border border-white/10 overflow-hidden">
+        <!-- BG -->
+        <div class="absolute inset-0 bg-surface-300"></div>
+        <div class="absolute inset-0 card-highlight"></div>
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-trust-500/[0.08] blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-trust-500/[0.04] blur-[100px] rounded-full"></div>
+
+        <div class="relative grid lg:grid-cols-2 gap-10 p-8 md:p-14">
+          <div class="flex flex-col justify-center">
+            <h2 class="font-space font-bold text-3xl md:text-4xl tracking-tight leading-[1.1] text-white mb-4">
+              Bergabunglah dengan Keluarga Besar<br>
+              <span class="text-trust-400">Gadjah Mada</span>
+            </h2>
+            <p class="text-neutral-400 text-base font-light leading-relaxed mb-8 max-w-md">
+              Jadilah bagian dari tradisi keilmuan terbaik bangsa. Raih masa depan gemilang bersama UGM.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <a href="#" class="group inline-flex items-center gap-2.5 bg-trust-500 text-black text-sm font-semibold px-7 py-3.5 rounded-full hover:bg-trust-400 transition-all shadow-[0_0_18px_rgba(212,168,67,0.25)] hover:shadow-[0_0_34px_rgba(212,168,67,0.55)]">
+                Daftar Sekarang
+                <iconify-icon icon="lucide:arrow-right" width="16" class="transition-transform group-hover:translate-x-1"></iconify-icon>
+              </a>
+              <a href="#" class="inline-flex items-center gap-2.5 border border-white/10 text-white text-sm font-semibold px-7 py-3.5 rounded-full hover:bg-white/10 hover:border-white/20 transition-all">
+                Panduan Pendaftaran
+              </a>
+            </div>
+          </div>
+
+          <div class="relative h-64 lg:h-auto rounded-2xl overflow-hidden border border-white/10">
+            <img src="https://picsum.photos/seed/ugm-students-campus/800/600.jpg" alt="Mahasiswa UGM" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-surface-300 via-transparent to-transparent"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="border-t border-white/5 pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-16">
+        <!-- Brand -->
+        <div class="lg:col-span-2">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-9 h-9 rounded-xl logo-gradient flex items-center justify-center shadow-lg">
+              <span class="text-black font-space font-bold text-sm">UGM</span>
+            </div>
+            <div>
+              <span class="text-sm font-semibold tracking-tight">Universitas Gadjah Mada</span>
+            </div>
+          </div>
+          <p class="text-sm text-neutral-500 leading-relaxed max-w-sm mb-6">
+            Universitas tertua dan terbesar di Indonesia, berkomitmen pada tiga dharma perguruan tinggi: pendidikan, penelitian, dan pengabdian masyarakat.
+          </p>
+          <div class="flex items-center gap-3">
+            <a href="#" class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-neutral-500 hover:text-trust-400 hover:border-trust-500/30 transition-all">
+              <iconify-icon icon="lucide:twitter" width="15"></iconify-icon>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-neutral-500 hover:text-trust-400 hover:border-trust-500/30 transition-all">
+              <iconify-icon icon="lucide:instagram" width="15"></iconify-icon>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-neutral-500 hover:text-trust-400 hover:border-trust-500/30 transition-all">
+              <iconify-icon icon="lucide:youtube" width="15"></iconify-icon>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-neutral-500 hover:text-trust-400 hover:border-trust-500/30 transition-all">
+              <iconify-icon icon="lucide:linkedin" width="15"></iconify-icon>
+            </a>
+          </div>
+        </div>
+
+        <!-- Akademik -->
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-4">Akademik</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#" class="text-sm text-neutral-500 hover:text-white transition-colors">Program Sarjana</a></li>
+            <li><a href="#" class="text-sm text-neutral-500 hover:text-white transition-colors">Program Magister</a></li>
+            <li><a href="#" class="text-sm text-neutral-500 hover:text-white transition-colors">Program Doktoral</a></li>
+            <li><a href="#" class="text-sm text-neutral-500 hover:text-white transition-colors">Profesi</a></li>
+            <li><a href="#" class="text-sm text-neutral-500 hover:text-white transition-colors">Kalender Akademik</a></li>
+          </ul>
+        </div>
+
+        <!-- Riset -->
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-4">Riset</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#" class="text-sm text-neutral-500 hover:text-white transition-colors">Lembaga Penelitian</a></li>
+            <li><a href="#" class="text-sm text-neutral-500 hover:text-white transition-colors">Jurnal UGM</a></li>
+            <li><a href="#" class="text-sm text-neutral-500 hover:text-white transition-colors">Publikasi Ilmiah</a></li>
+            <li><a href="#" class="text-sm text-neutral-500 hover:text-white transition-colors">Pusat Kajian</a></li>
+            <li><a href="#" class="text-sm text-neutral-500 hover:text-white transition-colors">Inovasi & HKI</a></li>
+          </ul>
+        </div>
+
+        <!-- Informasi -->
+        <div>
+          <h4 class="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-4">Informasi</h4>
+          <ul class="space-y-2.5">
+            <li><a href="#" class="text-sm text-neutral-500 hover:text-white transition-colors">Tentang UGM</a></li>
+            <li><a href="#" class="text-sm text-neutral-500 hover:text-white transition-colors">Peta Kampus</a></li>
+            <li><a href="#" class="text-sm text-neutral-500 hover:text-white transition-colors">Kontak</a></li>
+            <li><a href="#" class="text-sm text-neutral-500 hover:text-white transition-colors">Karir</a></li>
+            <li><a href="#" class="text-sm text-neutral-500 hover:text-white transition-colors">FAQ</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom -->
+      <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <p class="text-xs text-neutral-600">© 2024 Universitas Gadjah Mada. Seluruh hak cipta dilindungi.</p>
+        <div class="flex items-center gap-6">
+          <a href="#" class="text-xs text-neutral-600 hover:text-neutral-400 transition-colors">Kebijakan Privasi</a>
+          <a href="#" class="text-xs text-neutral-600 hover:text-neutral-400 transition-colors">Syarat & Ketentuan</a>
+          <a href="#" class="text-xs text-neutral-600 hover:text-neutral-400 transition-colors">Peta Situs</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== BACK TO TOP ===== -->
+  <button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" class="fixed bottom-6 right-6 z-50 w-10 h-10 rounded-full bg-surface-300/80 backdrop-blur-md border border-white/10 flex items-center justify-center text-neutral-400 hover:text-trust-400 hover:border-trust-500/30 transition-all opacity-0 pointer-events-none" style="transition: opacity 0.3s ease, border-color 0.3s ease, color 0.3s ease;">
+    <iconify-icon icon="lucide:chevron-up" width="18"></iconify-icon>
+  </button>
+
+  <script>
+    // Mobile Menu
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('open');
+      document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+    }
+
+    // Search Modal
+    function toggleSearch() {
+      const modal = document.getElementById('searchModal');
+      const input = document.getElementById('searchInput');
+      const isOpen = !modal.classList.contains('pointer-events-none');
+      
+      if (isOpen) {
+        modal.classList.add('opacity-0', 'pointer-events-none');
+      } else {
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        setTimeout(() => input.focus(), 100);
+      }
+    }
+
+    document.getElementById('searchModal').addEventListener('click', function(e) {
+      if (e.target === this) toggleSearch();
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const modal = document.getElementById('searchModal');
+        if (!modal.classList.contains('pointer-events-none')) {
+          toggleSearch();
+        }
+        const menu = document.getElementById('mobileMenu');
+        if (menu.classList.contains('open')) {
+          toggleMobileMenu();
+        }
+      }
+      // Ctrl+K to open search
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        toggleSearch();
+      }
+    });
+
+    // Back to Top
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 600) {
+        backToTop.style.opacity = '1';
+        backToTop.style.pointerEvents = 'auto';
+      } else {
+        backToTop.style.opacity = '0';
+        backToTop.style.pointerEvents = 'none';
+      }
+    });
+
+    // Intersection Observer for fade-up animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.animationPlayState = 'running';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => {
+      el.style.animationPlayState = 'paused';
+      observer.observe(el);
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
