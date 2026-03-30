@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universitas Gadjah Mada12</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background: #003366;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        nav {
+            background: #0055a5;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .hero {
+            background: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914') no-repeat center/cover;
+            height: 400px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .hero h1 {
+            background: rgba(0,0,0,0.6);
+            padding: 20px;
+        }
+        .container {
+            padding: 20px;
+        }
+        .grid {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .card {
+            flex: 1 1 calc(33% - 20px);
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        footer {
+            background: #003366;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        @media(max-width:768px){
+            .card {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Universitas Gadjah Mada12</h1>
+    <p>Mewujudkan Pendidikan Berkualitas dan Berdaya Saing Global</p>
+</header>
+
+<nav>
+    <a href="#">Beranda</a>
+    <a href="#">Profil</a>
+    <a href="#">Fakultas</a>
+    <a href="#">Berita</a>
+    <a href="#">Kontak</a>
+</nav>
+
+<section class="hero">
+    <h1>Selamat Datang di Universitas Gadjah Mada12</h1>
+</section>
+
+<div class="container">
+    <h2>Profil Universitas</h2>
+    <p>
+        Universitas Gadjah Mada12 adalah institusi pendidikan tinggi yang berkomitmen
+        dalam pengembangan ilmu pengetahuan, teknologi, dan karakter mahasiswa
+        untuk masa depan yang lebih baik.
+    </p>
+</div>
+
+<div class="container">
+    <h2>Fakultas</h2>
+    <div class="grid">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644">
+            <h3>Fakultas Teknik</h3>
+            <p>Mengembangkan inovasi teknologi modern.</p>
+        </div>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1581091870622-1e7c0d8d8b2c">
+            <h3>Fakultas Kedokteran</h3>
+            <p>Mendidik tenaga medis profesional.</p>
+        </div>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1571260899304-425eee4c7efc">
+            <h3>Fakultas Ekonomi</h3>
+            <p>Membentuk ahli ekonomi dan bisnis.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Berita Terbaru</h2>
+    <div class="grid">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c">
+            <h3>Seminar Nasional</h3>
+            <p>Seminar nasional teknologi dihadiri ratusan peserta.</p>
+        </div>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b">
+            <h3>Wisuda 2026</h3>
+            <p>Ribuan mahasiswa resmi diwisuda tahun ini.</p>
+        </div>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1497493292307-31c376b6e479">
+            <h3>Kerjasama Internasional</h3>
+            <p>Menjalin kerja sama dengan universitas luar negeri.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Galeri Kampus</h2>
+    <div class="grid">
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1562774053-701939374585">
+        </div>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1588072432836-e10032774350">
+        </div>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754">
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Universitas Gadjah Mada12 | All Rights Reserved</p>
+</footer>
+
+</body>
+</html>
